@@ -6,9 +6,7 @@
   <title>MEDS</title>
 
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -187,21 +185,13 @@
     }
 
     @media (max-width: 430px) {
-      body {
-        padding: 12px;
-      }
+      body { padding: 12px; }
 
-      .header h1 {
-        font-size: 48px;
-      }
+      .header h1 { font-size: 48px; }
 
-      .leaf {
-        font-size: 52px;
-      }
+      .leaf { font-size: 52px; }
 
-      .checkbox-group {
-        gap: 7px;
-      }
+      .checkbox-group { gap: 7px; }
 
       .check-box {
         font-size: 14px;
@@ -273,7 +263,7 @@
       <div class="card">
         <div class="medicine-row">
           <div class="medicine-icon">🩺</div>
-          <div class="medicine-title">Z</div>
+          <div class="medicine-title">Perindopril</div>
         </div>
         <div class="checkbox-group single">
           <label><input type="checkbox" id="z-daily"><span class="check-box">Суточно</span></label>
@@ -295,10 +285,8 @@
           <div class="medicine-icon">🍃</div>
           <div class="medicine-title">Folium</div>
         </div>
-        <div class="checkbox-group">
-          <label><input type="checkbox" id="folium-morning"><span class="check-box">Утро</span></label>
-          <label><input type="checkbox" id="folium-day"><span class="check-box">День</span></label>
-          <label><input type="checkbox" id="folium-evening"><span class="check-box">Вечер</span></label>
+        <div class="checkbox-group single">
+          <label><input type="checkbox" id="folium-daily"><span class="check-box">Суточно</span></label>
         </div>
       </div>
 
@@ -329,9 +317,7 @@
       const other = [
         'z-daily',
         'b12-daily',
-        'folium-morning',
-        'folium-day',
-        'folium-evening'
+        'folium-daily'
       ];
 
       const ids = section === 'fehra' ? fehra : other;
