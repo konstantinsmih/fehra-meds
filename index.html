@@ -6,160 +6,296 @@
   <title>MEDS</title>
 
   <style>
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
+
+    :root {
+      --green: #13996f;
+      --green-dark: #08715b;
+      --text: #102c27;
+      --muted: #6f7d79;
+      --line: #e7eeee;
+      --bg: #f7faf9;
+      --red: #e53935;
+    }
 
     body {
       margin: 0;
       min-height: 100vh;
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #e8f8ef, #f7faf9);
-      color: #12312c;
-      padding: 18px;
+      background: linear-gradient(180deg, #ffffff, #f0f7f4);
+      color: var(--text);
+      padding: 14px;
     }
 
     .app {
       max-width: 520px;
       margin: 0 auto;
-      padding-bottom: 30px;
+      padding-bottom: 28px;
     }
 
-    .header {
-      margin-bottom: 24px;
-      padding: 18px 8px 4px;
-      position: relative;
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 4px 18px;
     }
 
-    .header h1 {
+    .menu,
+    .bell {
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 12px;
+      background: #ffffff;
+      box-shadow: 0 4px 14px rgba(20, 80, 65, 0.08);
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    h1 {
       margin: 0;
-      font-size: 56px;
-      line-height: 1;
-      letter-spacing: 3px;
-      color: #0b6f5c;
+      font-size: 26px;
+      letter-spacing: 1px;
       font-weight: 900;
     }
 
-    .leaf {
-      position: absolute;
-      right: 20px;
-      top: 18px;
-      font-size: 64px;
-      opacity: 0.25;
-    }
-
-    .section {
-      background: rgba(255, 255, 255, 0.72);
-      border: 1px solid rgba(255, 255, 255, 0.9);
-      border-radius: 24px;
-      padding: 14px;
-      margin-bottom: 18px;
-      box-shadow: 0 14px 35px rgba(23, 92, 75, 0.12);
-      backdrop-filter: blur(12px);
-    }
-
-    .section-header {
+    .today {
       display: flex;
-      align-items: center;
-      gap: 10px;
-      margin: 4px 2px 14px;
-    }
-
-    .section-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: #e1f4ea;
-      display: flex;
-      align-items: center;
       justify-content: center;
-      color: #0b7a62;
-      font-size: 18px;
-      font-weight: bold;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--muted);
     }
 
-    .section-title {
-      margin: 0;
-      font-size: 22px;
-      color: #102c27;
+    .today strong {
+      color: var(--text);
     }
 
     .days-row {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
-      gap: 8px;
+      gap: 10px;
+      margin-bottom: 10px;
     }
 
-    .day-box {
+    .day-pill {
       display: block;
-      height: 46px;
-      border-radius: 12px;
+      text-align: center;
+      padding: 9px 0;
+      border-radius: 999px;
       background: #ffffff;
-      border: 1px solid #dfe8e5;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+      border: 1px solid #dce8e5;
+      color: var(--green-dark);
+      font-size: 14px;
+      font-weight: 800;
+      box-shadow: 0 4px 12px rgba(18, 70, 58, 0.06);
       transition: 0.2s ease;
-      position: relative;
     }
 
-    input[type="checkbox"]:checked + .day-box {
-      background: linear-gradient(135deg, #09916f, #08715b);
-      border-color: #08715b;
-      box-shadow: 0 6px 14px rgba(8,113,91,0.28);
+    input[type="checkbox"] {
+      display: none;
     }
 
-    input[type="checkbox"]:checked + .day-box::after {
-      content: "✓";
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    input[type="checkbox"]:checked + .day-pill {
+      background: var(--green);
       color: #ffffff;
-      font-size: 22px;
+      border-color: var(--green);
+      box-shadow: 0 8px 18px rgba(19, 153, 111, 0.3);
+    }
+
+    .progress {
+      height: 4px;
+      background: #dfe9e6;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    .progress span {
+      display: block;
+      width: 60%;
+      height: 100%;
+      background: var(--green);
+      border-radius: 999px;
+    }
+
+    .section {
+      margin-bottom: 24px;
+    }
+
+    .section-title {
+      margin: 0 0 12px;
+      font-size: 15px;
       font-weight: 900;
+      color: var(--green-dark);
     }
 
-    .card {
-      background: #ffffff;
-      border-radius: 18px;
-      padding: 13px;
-      margin-bottom: 12px;
-      box-shadow: 0 6px 18px rgba(15, 78, 66, 0.08);
-      border: 1px solid #edf3f1;
-    }
-
-    .medicine-row {
-      display: flex;
-      gap: 12px;
+    .medicine-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 58px 1fr;
       align-items: center;
+      gap: 12px;
+      min-height: 64px;
+      border-radius: 22px;
+      padding: 11px 14px 11px 11px;
       margin-bottom: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 22px rgba(20, 80, 65, 0.1);
+    }
+
+    .medicine-card.green {
+      background: linear-gradient(135deg, #44c79d, #14976f);
+      color: #ffffff;
+    }
+
+    .medicine-card.yellow {
+      background: linear-gradient(135deg, #ffe46a, #f7c735);
+      color: #1f241c;
+    }
+
+    .medicine-card.purple {
+      background: linear-gradient(135deg, #c990f4, #9860db);
+      color: #ffffff;
+    }
+
+    .medicine-card.blue {
+      background: linear-gradient(135deg, #d8edff, #b7dcff);
+      color: #173349;
+    }
+
+    .medicine-card.pink {
+      background: linear-gradient(135deg, #ffdce8, #ffc2d6);
+      color: #462333;
+    }
+
+    .medicine-card.mint {
+      background: linear-gradient(135deg, #dff8e8, #bff0d1);
+      color: #183928;
     }
 
     .medicine-icon {
-      min-width: 54px;
-      height: 54px;
-      border-radius: 14px;
-      background: #e3f5ee;
-      color: #0b7a62;
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.55);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
-      font-weight: 800;
+      font-size: 25px;
+      font-weight: 900;
+      backdrop-filter: blur(10px);
+    }
+
+    .medicine-main {
+      min-width: 0;
+    }
+
+    .medicine-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
     }
 
     .medicine-title {
-      font-size: 19px;
-      font-weight: 800;
-      color: #102c27;
+      font-size: 16px;
+      font-weight: 900;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .checkbox-group {
+    .daily-label {
+      font-size: 13px;
+      font-weight: 900;
+      opacity: 0.85;
+    }
+
+    .times {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 9px;
+      gap: 8px;
     }
 
-    .checkbox-group.single {
+    .times.single {
       grid-template-columns: 1fr;
+      justify-items: end;
+    }
+
+    .time-check {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .circle {
+      width: 21px;
+      height: 21px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.2);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 900;
+      color: transparent;
+      transition: 0.2s ease;
+    }
+
+    .yellow .circle,
+    .blue .circle,
+    .pink .circle,
+    .mint .circle {
+      border-color: rgba(20, 50, 40, 0.35);
+      background: rgba(255, 255, 255, 0.45);
+    }
+
+    input[type="checkbox"]:checked + .circle {
+      background: #ffffff;
+      color: var(--green);
+      border-color: #ffffff;
+    }
+
+    input[type="checkbox"]:checked + .circle::after {
+      content: "✓";
+    }
+
+    .yellow input[type="checkbox"]:checked + .circle,
+    .blue input[type="checkbox"]:checked + .circle,
+    .pink input[type="checkbox"]:checked + .circle,
+    .mint input[type="checkbox"]:checked + .circle {
+      background: var(--text);
+      color: #ffffff;
+      border-color: var(--text);
+    }
+
+    .reset {
+      width: 100%;
+      border: none;
+      border-radius: 999px;
+      padding: 14px;
+      margin-top: 10px;
+      background: #ffffff;
+      color: var(--red);
+      font-size: 15px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 8px 22px rgba(20, 80, 65, 0.1);
+    }
+
+    .reset:active {
+      transform: scale(0.98);
     }
 
     label {
@@ -167,79 +303,35 @@
       user-select: none;
     }
 
-    input[type="checkbox"] {
-      display: none;
-    }
-
-    .check-box {
-      display: block;
-      text-align: center;
-      padding: 10px 8px;
-      border-radius: 11px;
-      background: #ffffff;
-      color: #64706d;
-      font-size: 15px;
-      font-weight: 700;
-      border: 1px solid #dfe8e5;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
-      transition: 0.2s ease;
-    }
-
-    .checkbox-group.single .check-box {
-      padding: 14px 8px;
-      font-size: 17px;
-    }
-
-    input[type="checkbox"]:checked + .check-box {
-      background: linear-gradient(135deg, #09916f, #08715b);
-      color: #ffffff;
-      border-color: #08715b;
-      box-shadow: 0 6px 14px rgba(8, 113, 91, 0.28);
-    }
-
-    input[type="checkbox"]:checked + .check-box::before {
-      content: "✓ ";
-      font-weight: 900;
-    }
-
-    .reset {
-      width: 100%;
-      border: none;
-      border-radius: 15px;
-      padding: 14px;
-      margin-top: 4px;
-      background: #fff0ef;
-      color: #c01818;
-      font-size: 16px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .reset:active {
-      transform: scale(0.98);
-    }
-
     @media (max-width: 430px) {
-      body { padding: 12px; }
-
-      .header h1 { font-size: 48px; }
-
-      .leaf { font-size: 52px; }
-
-      .checkbox-group { gap: 7px; }
-
-      .check-box {
-        font-size: 14px;
-        padding: 9px 5px;
+      body {
+        padding: 12px;
       }
 
-      .checkbox-group.single .check-box {
-        font-size: 16px;
-        padding: 13px 8px;
+      .medicine-card {
+        grid-template-columns: 50px 1fr;
+        padding: 10px 12px 10px 10px;
+        border-radius: 20px;
       }
 
-      .day-box {
+      .medicine-icon {
+        width: 42px;
         height: 42px;
+        border-radius: 14px;
+        font-size: 22px;
+      }
+
+      .medicine-title {
+        font-size: 15px;
+      }
+
+      .time-check {
+        font-size: 11px;
+      }
+
+      .circle {
+        width: 20px;
+        height: 20px;
       }
     }
   </style>
@@ -247,61 +339,114 @@
 
 <body>
   <div class="app">
-    <header class="header">
-      <div class="leaf">🌿</div>
+    <header class="topbar">
+      <button class="menu">☰</button>
       <h1>MEDS</h1>
+      <button class="bell">⌁</button>
     </header>
 
-    <section class="section">
-      <div class="section-header">
-        <div class="section-icon">📅</div>
-        <h2 class="section-title">Days</h2>
-      </div>
+    <div class="today">
+      <span>Today ·</span>
+      <strong>Day 3 of 5</strong>
+    </div>
 
-      <div class="days-row">
-        <label><input type="checkbox" id="day1"><span class="day-box"></span></label>
-        <label><input type="checkbox" id="day2"><span class="day-box"></span></label>
-        <label><input type="checkbox" id="day3"><span class="day-box"></span></label>
-        <label><input type="checkbox" id="day4"><span class="day-box"></span></label>
-        <label><input type="checkbox" id="day5"><span class="day-box"></span></label>
-      </div>
+    <section class="days-row">
+      <label>
+        <input type="checkbox" id="day1">
+        <span class="day-pill">1</span>
+      </label>
+
+      <label>
+        <input type="checkbox" id="day2">
+        <span class="day-pill">2</span>
+      </label>
+
+      <label>
+        <input type="checkbox" id="day3">
+        <span class="day-pill">3</span>
+      </label>
+
+      <label>
+        <input type="checkbox" id="day4">
+        <span class="day-pill">4</span>
+      </label>
+
+      <label>
+        <input type="checkbox" id="day5">
+        <span class="day-pill">5</span>
+      </label>
     </section>
 
+    <div class="progress">
+      <span></span>
+    </div>
+
     <section class="section">
-      <div class="section-header">
-        <div class="section-icon">🌿</div>
-        <h2 class="section-title">Fehra</h2>
+      <h2 class="section-title">🌿 Fehra</h2>
+
+      <div class="medicine-card green">
+        <div class="medicine-icon">💊</div>
+
+        <div class="medicine-main">
+          <div class="medicine-header">
+            <div class="medicine-title">Vetimune</div>
+          </div>
+
+          <div class="times">
+            <label class="time-check">
+              <input type="checkbox" id="vetimune-morning">
+              <span class="circle"></span>
+              <span>morning</span>
+            </label>
+
+            <label class="time-check">
+              <input type="checkbox" id="vetimune-day">
+              <span class="circle"></span>
+              <span>day</span>
+            </label>
+
+            <label class="time-check">
+              <input type="checkbox" id="vetimune-evening">
+              <span class="circle"></span>
+              <span>evening</span>
+            </label>
+          </div>
+        </div>
       </div>
 
-      <div class="card">
-        <div class="medicine-row">
-          <div class="medicine-icon">🛡</div>
-          <div class="medicine-title">Vetinmune</div>
-        </div>
-        <div class="checkbox-group">
-          <label><input type="checkbox" id="vetimune-morning"><span class="check-box">Morning</span></label>
-          <label><input type="checkbox" id="vetimune-day"><span class="check-box">Afternoon</span></label>
-          <label><input type="checkbox" id="vetimune-evening"><span class="check-box">Evening</span></label>
+      <div class="medicine-card yellow">
+        <div class="medicine-icon">⚡</div>
+
+        <div class="medicine-main">
+          <div class="medicine-header">
+            <div class="medicine-title">Da Forte</div>
+            <div class="daily-label">daily</div>
+          </div>
+
+          <div class="times single">
+            <label class="time-check">
+              <input type="checkbox" id="daforte-daily">
+              <span class="circle"></span>
+            </label>
+          </div>
         </div>
       </div>
 
-      <div class="card">
-        <div class="medicine-row">
-          <div class="medicine-icon">⚡</div>
-          <div class="medicine-title">Da Forte</div>
-        </div>
-        <div class="checkbox-group single">
-          <label><input type="checkbox" id="daforte-daily"><span class="check-box">Daily</span></label>
-        </div>
-      </div>
+      <div class="medicine-card purple">
+        <div class="medicine-icon">☤</div>
 
-      <div class="card">
-        <div class="medicine-row">
-          <div class="medicine-icon">☤</div>
-          <div class="medicine-title">Symbiotic</div>
-        </div>
-        <div class="checkbox-group single">
-          <label><input type="checkbox" id="symbiotic-daily"><span class="check-box">Daily</span></label>
+        <div class="medicine-main">
+          <div class="medicine-header">
+            <div class="medicine-title">Symbiotic</div>
+            <div class="daily-label">daily</div>
+          </div>
+
+          <div class="times single">
+            <label class="time-check">
+              <input type="checkbox" id="symbiotic-daily">
+              <span class="circle"></span>
+            </label>
+          </div>
         </div>
       </div>
 
@@ -309,38 +454,59 @@
     </section>
 
     <section class="section">
-      <div class="section-header">
-        <div class="section-icon">🌿</div>
-        <h2 class="section-title">Others</h2>
-      </div>
+      <h2 class="section-title">Other</h2>
 
-      <div class="card">
-        <div class="medicine-row">
-          <div class="medicine-icon">🩺</div>
-          <div class="medicine-title">Perindopril</div>
-        </div>
-        <div class="checkbox-group single">
-          <label><input type="checkbox" id="z-daily"><span class="check-box">Daily</span></label>
-        </div>
-      </div>
+      <div class="medicine-card blue">
+        <div class="medicine-icon">🩺</div>
 
-      <div class="card">
-        <div class="medicine-row">
-          <div class="medicine-icon">💊</div>
-          <div class="medicine-title">B12</div>
-        </div>
-        <div class="checkbox-group single">
-          <label><input type="checkbox" id="b12-daily"><span class="check-box">Daily</span></label>
+        <div class="medicine-main">
+          <div class="medicine-header">
+            <div class="medicine-title">Perindopril</div>
+            <div class="daily-label">daily</div>
+          </div>
+
+          <div class="times single">
+            <label class="time-check">
+              <input type="checkbox" id="z-daily">
+              <span class="circle"></span>
+            </label>
+          </div>
         </div>
       </div>
 
-      <div class="card">
-        <div class="medicine-row">
-          <div class="medicine-icon">🍃</div>
-          <div class="medicine-title">Folium</div>
+      <div class="medicine-card pink">
+        <div class="medicine-icon">B12</div>
+
+        <div class="medicine-main">
+          <div class="medicine-header">
+            <div class="medicine-title">B12</div>
+            <div class="daily-label">daily</div>
+          </div>
+
+          <div class="times single">
+            <label class="time-check">
+              <input type="checkbox" id="b12-daily">
+              <span class="circle"></span>
+            </label>
+          </div>
         </div>
-        <div class="checkbox-group single">
-          <label><input type="checkbox" id="folium-daily"><span class="check-box">Daily</span></label>
+      </div>
+
+      <div class="medicine-card mint">
+        <div class="medicine-icon">🍃</div>
+
+        <div class="medicine-main">
+          <div class="medicine-header">
+            <div class="medicine-title">Folium</div>
+            <div class="daily-label">daily</div>
+          </div>
+
+          <div class="times single">
+            <label class="time-check">
+              <input type="checkbox" id="folium-daily">
+              <span class="circle"></span>
+            </label>
+          </div>
         </div>
       </div>
 
