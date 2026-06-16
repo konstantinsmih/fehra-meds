@@ -40,12 +40,6 @@
       font-weight: 900;
     }
 
-    .header p {
-      margin: 10px 0 0;
-      color: #5f746f;
-      font-size: 16px;
-    }
-
     .leaf {
       position: absolute;
       right: 20px;
@@ -227,7 +221,6 @@
     <header class="header">
       <div class="leaf">🌿</div>
       <h1>MEDS</h1>
-      <p>Отметки приёма лекарств</p>
     </header>
 
     <section class="section">
@@ -279,25 +272,21 @@
 
       <div class="card">
         <div class="medicine-row">
-          <div class="medicine-icon">Z</div>
+          <div class="medicine-icon">🩺</div>
           <div class="medicine-title">Z</div>
         </div>
-        <div class="checkbox-group">
-          <label><input type="checkbox" id="z-morning"><span class="check-box">Утро</span></label>
-          <label><input type="checkbox" id="z-day"><span class="check-box">День</span></label>
-          <label><input type="checkbox" id="z-evening"><span class="check-box">Вечер</span></label>
+        <div class="checkbox-group single">
+          <label><input type="checkbox" id="z-daily"><span class="check-box">Суточно</span></label>
         </div>
       </div>
 
       <div class="card">
         <div class="medicine-row">
-          <div class="medicine-icon">B12</div>
+          <div class="medicine-icon">💊</div>
           <div class="medicine-title">B12</div>
         </div>
-        <div class="checkbox-group">
-          <label><input type="checkbox" id="b12-morning"><span class="check-box">Утро</span></label>
-          <label><input type="checkbox" id="b12-day"><span class="check-box">День</span></label>
-          <label><input type="checkbox" id="b12-evening"><span class="check-box">Вечер</span></label>
+        <div class="checkbox-group single">
+          <label><input type="checkbox" id="b12-daily"><span class="check-box">Суточно</span></label>
         </div>
       </div>
 
@@ -338,12 +327,8 @@
       ];
 
       const other = [
-        'z-morning',
-        'z-day',
-        'z-evening',
-        'b12-morning',
-        'b12-day',
-        'b12-evening',
+        'z-daily',
+        'b12-daily',
         'folium-morning',
         'folium-day',
         'folium-evening'
