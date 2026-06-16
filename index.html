@@ -82,6 +82,41 @@
       color: #102c27;
     }
 
+    .days-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .day-box {
+      display: block;
+      height: 46px;
+      border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid #dfe8e5;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+      transition: 0.2s ease;
+      position: relative;
+    }
+
+    input[type="checkbox"]:checked + .day-box {
+      background: linear-gradient(135deg, #09916f, #08715b);
+      border-color: #08715b;
+      box-shadow: 0 6px 14px rgba(8,113,91,0.28);
+    }
+
+    input[type="checkbox"]:checked + .day-box::after {
+      content: "✓";
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 22px;
+      font-weight: 900;
+    }
+
     .card {
       background: #ffffff;
       border-radius: 18px;
@@ -202,6 +237,10 @@
         font-size: 16px;
         padding: 13px 8px;
       }
+
+      .day-box {
+        height: 42px;
+      }
     }
   </style>
 </head>
@@ -212,6 +251,21 @@
       <div class="leaf">🌿</div>
       <h1>MEDS</h1>
     </header>
+
+    <section class="section">
+      <div class="section-header">
+        <div class="section-icon">📅</div>
+        <h2 class="section-title">Days</h2>
+      </div>
+
+      <div class="days-row">
+        <label><input type="checkbox" id="day1"><span class="day-box"></span></label>
+        <label><input type="checkbox" id="day2"><span class="day-box"></span></label>
+        <label><input type="checkbox" id="day3"><span class="day-box"></span></label>
+        <label><input type="checkbox" id="day4"><span class="day-box"></span></label>
+        <label><input type="checkbox" id="day5"><span class="day-box"></span></label>
+      </div>
+    </section>
 
     <section class="section">
       <div class="section-header">
