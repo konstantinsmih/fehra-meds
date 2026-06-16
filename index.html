@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Приём лекарств</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    h1, h2 {
+      text-align: center;
+    }
+
+    .section {
+      margin-bottom: 35px;
+    }
+
+    .card {
+      background: white;
+      padding: 15px;
+      margin-bottom: 12px;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+
+    .medicine-title {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .checkbox-group {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+    }
+
+    input[type="checkbox"] {
+      width: 30px;
+      height: 30px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      font-size: 18px;
+      border: none;
+      border-radius: 12px;
+      background: #d9534f;
+      color: white;
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Приём лекарств</h1>
+
+  <div class="section">
+    <h2>Прием лекарств Фэра:</h2>
+
+    <div class="card">
+      <div class="medicine-title">Лекарство 1</div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="fera_med1_1">
+        <input type="checkbox" id="fera_med1_2">
+        <input type="checkbox" id="fera_med1_3">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="medicine-title">Лекарство 2</div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="fera_med2_1">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="medicine-title">Лекарство 3</div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="fera_med3_1">
+      </div>
+    </div>
+
+    <button onclick="resetFera()">Сбросить отметки Фэра</button>
+  </div>
+
+  <div class="section">
+    <h2>Мои:</h2>
+
+    <div class="card">
+      <div class="medicine-title">Лекарство 1</div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="my_med1_1">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="medicine-title">Лекарство 2</div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="my_med2_1">
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="medicine-title">Лекарство 3</div>
+      <div class="checkbox-group">
+        <input type="checkbox" id="my_med3_1">
+      </div>
+    </div>
+
+    <button onclick="resetMy()">Сбросить мои отметки</button>
+  </div>
+
+  <script>
+    const feraCheckboxes = [
+      "fera_med1_1",
+      "fera_med1_2",
+      "fera_med1_3",
+      "fera_med2_1",
+      "fera_med3_1"
+    ];
+
+    const myCheckboxes = [
+      "my_med1_1",
+      "my_med2_1",
+      "my_med3_1"
+    ];
+
+    const allCheckboxes = [...feraCheckboxes, ...myCheckboxes];
+
+    allCheckboxes.forEach(id => {
+      const checkbox = document.getElementById(id);
+
+      checkbox.checked = localStorage.getItem(id) === "true";
+
+      checkbox.addEventListener("change", () => {
+        localStorage.setItem(id, checkbox.checked);
+      });
+    });
+
+    function resetFera() {
+      feraCheckboxes.forEach(id => {
+        localStorage.removeItem(id);
+        document.getElementById(id).checked = false;
+      });
+    }
+
+    function resetMy() {
+      myCheckboxes.forEach(id => {
+        localStorage.removeItem(id);
+        document.getElementById(id).checked = false;
+      });
+    }
+  </script>
+
+</body>
+</html>
