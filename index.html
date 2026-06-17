@@ -119,7 +119,6 @@
 
     .progress-wrap {
       margin-top: 14px;
-      margin-bottom: 14px;
     }
 
     .progress-info {
@@ -324,16 +323,6 @@
         <h2 class="section-title">Fehra</h2>
       </div>
 
-      <div class="progress-wrap">
-        <div class="progress-info">
-          <span>Progress</span>
-          <span id="fehra-progress-text">0%</span>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" id="fehra-progress-fill"></div>
-        </div>
-      </div>
-
       <div class="card">
         <div class="medicine-row">
           <div class="medicine-icon">🛡</div>
@@ -375,16 +364,6 @@
         <h2 class="section-title">Others</h2>
       </div>
 
-      <div class="progress-wrap">
-        <div class="progress-info">
-          <span>Progress</span>
-          <span id="other-progress-text">0%</span>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" id="other-progress-fill"></div>
-        </div>
-      </div>
-
       <div class="card">
         <div class="medicine-row">
           <div class="medicine-icon">🩺</div>
@@ -424,36 +403,16 @@
 
     const dayIds = ['day1', 'day2', 'day3', 'day4', 'day5'];
 
-    const fehraIds = [
-      'vetinmune-morning',
-      'vetinmune-day',
-      'vetinmune-evening',
-      'daforte-daily',
-      'symbiotic-daily'
-    ];
-
-    const otherIds = [
-      'z-daily',
-      'b12-daily',
-      'folium-daily'
-    ];
-
-    function updateProgress(ids, fillId, textId) {
-      const checkedCount = ids.filter(id => {
+    function updateDaysProgress() {
+      const checkedDays = dayIds.filter(id => {
         const box = document.getElementById(id);
         return box && box.checked;
       }).length;
 
-      const percent = Math.round((checkedCount / ids.length) * 100);
+      const percent = Math.round((checkedDays / dayIds.length) * 100);
 
-      document.getElementById(fillId).style.width = percent + '%';
-      document.getElementById(textId).textContent = percent + '%';
-    }
-
-    function updateAllProgress() {
-      updateProgress(dayIds, 'days-progress-fill', 'days-progress-text');
-      updateProgress(fehraIds, 'fehra-progress-fill', 'fehra-progress-text');
-      updateProgress(otherIds, 'other-progress-fill', 'other-progress-text');
+      document.getElementById('days-progress-fill').style.width = percent + '%';
+      document.getElementById('days-progress-text').textContent = percent + '%';
     }
 
     checkboxes.forEach(box => {
@@ -461,14 +420,28 @@
 
       box.addEventListener('change', () => {
         localStorage.setItem(box.id, box.checked);
-        updateAllProgress();
+        updateDaysProgress();
       });
     });
 
-    updateAllProgress();
+    updateDaysProgress();
 
     function resetSection(section) {
-      const ids = section === 'fehra' ? fehraIds : otherIds;
+      const fehra = [
+        'vetinmune-morning',
+        'vetinmune-day',
+        'vetinmune-evening',
+        'daforte-daily',
+        'symbiotic-daily'
+      ];
+
+      const other = [
+        'z-daily',
+        'b12-daily',
+        'folium-daily'
+      ];
+
+      const ids = section === 'fehra' ? fehra : other;
 
       ids.forEach(id => {
         const box = document.getElementById(id);
@@ -479,7 +452,7 @@
         }
       });
 
-      updateAllProgress();
+      updateDaysProgress();
     }
   </script>
 </body>
