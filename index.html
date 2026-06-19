@@ -406,6 +406,33 @@
 
       <button class="reset" onclick="resetSection('other')">↻ Reset Others</button>
     </section>
+
+    <section class="section">
+      <div class="section-header">
+        <div class="section-icon">✓</div>
+        <h2 class="section-title">Total Progress</h2>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-info">
+          <span>Fehra</span>
+          <span id="fehra-progress-text">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="fehra-progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-info">
+          <span>Others</span>
+          <span id="other-progress-text">0%</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="other-progress-fill"></div>
+        </div>
+      </div>
+    </section>
   </div>
 
   <script>
@@ -421,16 +448,37 @@
       'day7'
     ];
 
-    function updateDaysProgress() {
-      const checkedDays = dayIds.filter(id => {
+    const fehraIds = [
+      'metrobactim-morning',
+      'metrobactim-evening',
+      'vetinmune-morning',
+      'vetinmune-day',
+      'vetinmune-evening',
+      'daforte-daily',
+      'symbiotic-daily'
+    ];
+
+    const otherIds = [
+      'z-daily',
+      'vitd-daily'
+    ];
+
+    function updateProgress(ids, fillId, textId) {
+      const checked = ids.filter(id => {
         const box = document.getElementById(id);
         return box && box.checked;
       }).length;
 
-      const percent = Math.round((checkedDays / dayIds.length) * 100);
+      const percent = Math.round((checked / ids.length) * 100);
 
-      document.getElementById('days-progress-fill').style.width = percent + '%';
-      document.getElementById('days-progress-text').textContent = percent + '%';
+      document.getElementById(fillId).style.width = percent + '%';
+      document.getElementById(textId).textContent = percent + '%';
+    }
+
+    function updateAllProgress() {
+      updateProgress(dayIds, 'days-progress-fill', 'days-progress-text');
+      updateProgress(fehraIds, 'fehra-progress-fill', 'fehra-progress-text');
+      updateProgress(otherIds, 'other-progress-fill', 'other-progress-text');
     }
 
     checkboxes.forEach(box => {
@@ -438,29 +486,14 @@
 
       box.addEventListener('change', () => {
         localStorage.setItem(box.id, box.checked);
-        updateDaysProgress();
+        updateAllProgress();
       });
     });
 
-    updateDaysProgress();
+    updateAllProgress();
 
     function resetSection(section) {
-      const fehra = [
-        'metrobactim-morning',
-        'metrobactim-evening',
-        'vetinmune-morning',
-        'vetinmune-day',
-        'vetinmune-evening',
-        'daforte-daily',
-        'symbiotic-daily'
-      ];
-
-      const other = [
-        'z-daily',
-        'vitd-daily'
-      ];
-
-      const ids = section === 'fehra' ? fehra : other;
+      const ids = section === 'fehra' ? fehraIds : otherIds;
 
       ids.forEach(id => {
         const box = document.getElementById(id);
@@ -471,7 +504,7 @@
         }
       });
 
-      updateDaysProgress();
+      updateAllProgress();
     }
   </script>
 </body>
