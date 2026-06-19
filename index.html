@@ -404,6 +404,26 @@
         </div>
       </div>
 
+      <div class="card">
+        <div class="medicine-row">
+          <div class="medicine-icon">💊</div>
+          <div class="medicine-title">Vitamin B12</div>
+        </div>
+        <div class="checkbox-group single">
+          <label><input type="checkbox" id="b12-daily"><span class="check-box">Daily</span></label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="medicine-row">
+          <div class="medicine-icon">🍃</div>
+          <div class="medicine-title">Folium</div>
+        </div>
+        <div class="checkbox-group single">
+          <label><input type="checkbox" id="folium-daily"><span class="check-box">Daily</span></label>
+        </div>
+      </div>
+
       <button class="reset" onclick="resetSection('other')">↻ Reset Others</button>
     </section>
 
@@ -460,7 +480,9 @@
 
     const otherIds = [
       'z-daily',
-      'vitd-daily'
+      'vitd-daily',
+      'b12-daily',
+      'folium-daily'
     ];
 
     function updateProgress(ids, fillId, textId) {
