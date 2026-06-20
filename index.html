@@ -386,6 +386,17 @@
 
       <div class="card">
         <div class="medicine-row">
+          <div class="medicine-icon">🩺</div>
+          <div class="medicine-title">Blood pressure</div>
+        </div>
+        <div class="checkbox-group two">
+          <label><input type="checkbox" id="bp-morning"><span class="check-box">Morning</span></label>
+          <label><input type="checkbox" id="bp-evening"><span class="check-box">Evening</span></label>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="medicine-row">
           <div class="medicine-icon">❤️</div>
           <div class="medicine-title">Betac</div>
         </div>
@@ -479,6 +490,8 @@
     ];
 
     const otherIds = [
+      'bp-morning',
+      'bp-evening',
       'z-daily',
       'vitd-daily',
       'b12-daily',
