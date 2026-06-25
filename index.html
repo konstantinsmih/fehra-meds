@@ -29,7 +29,7 @@
     }
 
     .header {
-      margin-bottom: 24px;
+      margin-bottom: 18px;
       padding: 18px 8px 4px;
       position: relative;
     }
@@ -253,6 +253,33 @@
 
     <section class="section">
       <div class="section-header">
+        <div class="section-icon">✓</div>
+        <h2 class="section-title">Total Progress</h2>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-info">
+          <span>Fehra</span>
+          <span id="fehra-progress-text">0/7</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="fehra-progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <div class="progress-info">
+          <span>Others</span>
+          <span id="other-progress-text">0/6</span>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-fill" id="other-progress-fill"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-header">
         <div class="section-icon">🌿</div>
         <h2 class="section-title">Fehra</h2>
       </div>
@@ -361,33 +388,6 @@
       </div>
 
       <button class="reset" onclick="resetSection('other')">↻ Reset Others</button>
-    </section>
-
-    <section class="section">
-      <div class="section-header">
-        <div class="section-icon">✓</div>
-        <h2 class="section-title">Total Progress</h2>
-      </div>
-
-      <div class="progress-wrap">
-        <div class="progress-info">
-          <span>Fehra</span>
-          <span id="fehra-progress-text">0/7</span>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" id="fehra-progress-fill"></div>
-        </div>
-      </div>
-
-      <div class="progress-wrap">
-        <div class="progress-info">
-          <span>Others</span>
-          <span id="other-progress-text">0/6</span>
-        </div>
-        <div class="progress-bar">
-          <div class="progress-fill" id="other-progress-fill"></div>
-        </div>
-      </div>
     </section>
   </div>
 
