@@ -224,11 +224,8 @@
 
     @media (max-width: 430px) {
       body { padding: 12px; }
-
       .header h1 { font-size: 48px; }
-
       .leaf { font-size: 52px; }
-
       .checkbox-group { gap: 7px; }
 
       .check-box {
@@ -246,8 +243,9 @@
 
 <body>
   <div class="app">
+
     <header class="header">
-      <div class="leaf">🌿</div>
+      <div class="leaf"></div>
       <h1>MEDS</h1>
     </header>
 
@@ -260,8 +258,9 @@
       <div class="progress-wrap">
         <div class="progress-info">
           <span>Fehra</span>
-          <span id="fehra-progress-text">0/4</span>
+          <span id="fehra-progress-text">0/3</span>
         </div>
+
         <div class="progress-bar">
           <div class="progress-fill" id="fehra-progress-fill"></div>
         </div>
@@ -272,6 +271,7 @@
           <span>Others</span>
           <span id="other-progress-text">0/5</span>
         </div>
+
         <div class="progress-bar">
           <div class="progress-fill" id="other-progress-fill"></div>
         </div>
@@ -280,29 +280,31 @@
 
     <section class="section">
       <div class="section-header">
-        <div class="section-icon">🌿</div>
+        <div class="section-icon"></div>
         <h2 class="section-title">Fehra</h2>
       </div>
 
       <div class="card">
         <div class="medicine-row">
-          <div class="medicine-icon">🛡</div>
+          <div class="medicine-icon"></div>
           <div class="medicine-title">Vetinmune</div>
         </div>
-        <div class="checkbox-group">
-          <label><input type="checkbox" id="vetinmune-morning"><span class="check-box">Morning</span></label>
-          <label><input type="checkbox" id="vetinmune-day"><span class="check-box">Afternoon</span></label>
-          <label><input type="checkbox" id="vetinmune-evening"><span class="check-box">Evening</span></label>
-        </div>
-      </div>
 
-      <div class="card">
-        <div class="medicine-row">
-          <div class="medicine-icon">☤</div>
-          <div class="medicine-title">Symbiotic</div>
-        </div>
-        <div class="checkbox-group single">
-          <label><input type="checkbox" id="symbiotic-daily"><span class="check-box">Daily</span></label>
+        <div class="checkbox-group">
+          <label>
+            <input type="checkbox" id="vetinmune-morning">
+            <span class="check-box">Morning</span>
+          </label>
+
+          <label>
+            <input type="checkbox" id="vetinmune-day">
+            <span class="check-box">Afternoon</span>
+          </label>
+
+          <label>
+            <input type="checkbox" id="vetinmune-evening">
+            <span class="check-box">Evening</span>
+          </label>
         </div>
       </div>
 
@@ -311,18 +313,26 @@
 
     <section class="section">
       <div class="section-header">
-        <div class="section-icon">🌿</div>
+        <div class="section-icon"></div>
         <h2 class="section-title">Others</h2>
       </div>
 
       <div class="card">
         <div class="medicine-row">
-          <div class="medicine-icon">🩺</div>
+          <div class="medicine-icon"></div>
           <div class="medicine-title">Blood pressure</div>
         </div>
+
         <div class="checkbox-group two">
-          <label><input type="checkbox" id="bp-morning"><span class="check-box">Morning</span></label>
-          <label><input type="checkbox" id="bp-evening"><span class="check-box">Evening</span></label>
+          <label>
+            <input type="checkbox" id="bp-morning">
+            <span class="check-box">Morning</span>
+          </label>
+
+          <label>
+            <input type="checkbox" id="bp-evening">
+            <span class="check-box">Evening</span>
+          </label>
         </div>
       </div>
 
@@ -331,8 +341,12 @@
           <div class="medicine-icon">❤️</div>
           <div class="medicine-title">Betac</div>
         </div>
+
         <div class="checkbox-group single">
-          <label><input type="checkbox" id="z-daily"><span class="check-box">Daily</span></label>
+          <label>
+            <input type="checkbox" id="z-daily">
+            <span class="check-box">Daily</span>
+          </label>
         </div>
       </div>
 
@@ -341,23 +355,32 @@
           <div class="medicine-icon">☀️</div>
           <div class="medicine-title">Vitamin D</div>
         </div>
+
         <div class="checkbox-group single">
-          <label><input type="checkbox" id="vitd-daily"><span class="check-box">Daily</span></label>
+          <label>
+            <input type="checkbox" id="vitd-daily">
+            <span class="check-box">Daily</span>
+          </label>
         </div>
       </div>
 
       <div class="card">
         <div class="medicine-row">
-          <div class="medicine-icon">💊</div>
+          <div class="medicine-icon"></div>
           <div class="medicine-title">Vitamin B12, Folium, Omega, Complex</div>
         </div>
+
         <div class="checkbox-group single">
-          <label><input type="checkbox" id="b12-daily"><span class="check-box">Daily</span></label>
+          <label>
+            <input type="checkbox" id="b12-daily">
+            <span class="check-box">Daily</span>
+          </label>
         </div>
       </div>
 
       <button class="reset" onclick="resetSection('other')">↻ Reset Others</button>
     </section>
+
   </div>
 
   <script>
@@ -366,8 +389,7 @@
     const fehraIds = [
       'vetinmune-morning',
       'vetinmune-day',
-      'vetinmune-evening',
-      'symbiotic-daily'
+      'vetinmune-evening'
     ];
 
     const otherIds = [
