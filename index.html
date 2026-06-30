@@ -88,6 +88,38 @@
       color: #102c27;
     }
 
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 9px;
+    }
+
+    .day-box {
+      display: block;
+      height: 38px;
+      border-radius: 11px;
+      background: #ffffff;
+      border: 1px solid #dfe8e5;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.04);
+      transition: 0.2s ease;
+    }
+
+    input[type="checkbox"]:checked + .day-box {
+      background: linear-gradient(135deg, #09916f, #08715b);
+      border-color: #08715b;
+      box-shadow: 0 6px 14px rgba(8, 113, 91, 0.28);
+    }
+
+    input[type="checkbox"]:checked + .day-box::before {
+      content: "✓";
+      display: block;
+      text-align: center;
+      line-height: 38px;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
     .progress-wrap {
       margin-top: 14px;
     }
@@ -289,7 +321,10 @@
         height: 52px;
       }
 
-      .checkbox-group { gap: 7px; }
+      .checkbox-group,
+      .days-grid {
+        gap: 7px;
+      }
 
       .check-box {
         font-size: 14px;
@@ -299,6 +334,14 @@
       .checkbox-group.single .check-box {
         font-size: 16px;
         padding: 13px 8px;
+      }
+
+      .day-box {
+        height: 34px;
+      }
+
+      input[type="checkbox"]:checked + .day-box::before {
+        line-height: 34px;
       }
     }
   </style>
@@ -317,6 +360,21 @@
 
       <h1>MEDS</h1>
     </header>
+
+    <section class="section">
+      <div class="days-grid">
+        <label><input type="checkbox" id="top-check-1"><span class="day-box"></span></label>
+        <label><input type="checkbox" id="top-check-2"><span class="day-box"></span></label>
+        <label><input type="checkbox" id="top-check-3"><span class="day-box"></span></label>
+        <label><input type="checkbox" id="top-check-4"><span class="day-box"></span></label>
+        <label><input type="checkbox" id="top-check-5"><span class="day-box"></span></label>
+        <label><input type="checkbox" id="top-check-6"><span class="day-box"></span></label>
+        <label><input type="checkbox" id="top-check-7"><span class="day-box"></span></label>
+        <label><input type="checkbox" id="top-check-8"><span class="day-box"></span></label>
+        <label><input type="checkbox" id="top-check-9"><span class="day-box"></span></label>
+        <label><input type="checkbox" id="top-check-10"><span class="day-box"></span></label>
+      </div>
+    </section>
 
     <section class="section">
       <div class="section-header">
