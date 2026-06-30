@@ -124,6 +124,23 @@
       margin-bottom: 12px;
       box-shadow: 0 6px 18px rgba(15, 78, 66, 0.08);
       border: 1px solid #edf3f1;
+      transition: 0.25s ease;
+    }
+
+    .card.completed {
+      background: linear-gradient(135deg, #09916f, #08715b);
+      border-color: #08715b;
+      box-shadow: 0 8px 20px rgba(8, 113, 91, 0.28);
+    }
+
+    .card.completed .medicine-title,
+    .card.completed .icon-text {
+      color: #ffffff;
+    }
+
+    .card.completed .medicine-icon {
+      background: rgba(255, 255, 255, 0.18);
+      color: #ffffff;
     }
 
     .medicine-row {
@@ -227,6 +244,13 @@
       color: #ffffff;
       border-color: #08715b;
       box-shadow: 0 6px 14px rgba(8, 113, 91, 0.28);
+    }
+
+    .card.completed input[type="checkbox"]:checked + .check-box {
+      background: #ffffff;
+      color: #08715b;
+      border-color: #ffffff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.12);
     }
 
     input[type="checkbox"]:checked + .check-box::before {
@@ -387,23 +411,23 @@
 
         <div class="checkbox-group two">
           <label>
-            <input type="checkbox" id="oftan-1">
-            <span class="check-box">1</span>
+            <input type="checkbox" id="oftan-morning">
+            <span class="check-box">Morning</span>
           </label>
 
           <label>
-            <input type="checkbox" id="oftan-2">
-            <span class="check-box">2</span>
+            <input type="checkbox" id="oftan-lunch">
+            <span class="check-box">Lunch</span>
           </label>
 
           <label>
-            <input type="checkbox" id="oftan-3">
-            <span class="check-box">3</span>
+            <input type="checkbox" id="oftan-evening">
+            <span class="check-box">Evening</span>
           </label>
 
           <label>
-            <input type="checkbox" id="oftan-4">
-            <span class="check-box">4</span>
+            <input type="checkbox" id="oftan-night">
+            <span class="check-box">Night</span>
           </label>
         </div>
       </div>
@@ -519,10 +543,10 @@
       'vetinmune-morning',
       'vetinmune-day',
       'vetinmune-evening',
-      'oftan-1',
-      'oftan-2',
-      'oftan-3',
-      'oftan-4'
+      'oftan-morning',
+      'oftan-lunch',
+      'oftan-evening',
+      'oftan-night'
     ];
 
     const otherIds = [
@@ -546,9 +570,21 @@
       document.getElementById(textId).textContent = checked + '/' + total;
     }
 
+    function updateCompletedCards() {
+      const cards = document.querySelectorAll('.card');
+
+      cards.forEach(card => {
+        const boxes = Array.from(card.querySelectorAll('input[type="checkbox"]'));
+        const completed = boxes.length > 0 && boxes.every(box => box.checked);
+
+        card.classList.toggle('completed', completed);
+      });
+    }
+
     function updateAllProgress() {
       updateProgress(fehraIds, 'fehra-progress-fill', 'fehra-progress-text');
       updateProgress(otherIds, 'other-progress-fill', 'other-progress-text');
+      updateCompletedCards();
     }
 
     checkboxes.forEach(box => {
